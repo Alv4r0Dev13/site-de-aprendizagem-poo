@@ -72,7 +72,7 @@
 				"noVar": "warn",
 				"noYodaExpression": "error",
 				"useAsConstAssertion": "error",
-				"useBlockStatements": "error",
+				"useBlockStatements": "off",
 				"useConsistentArrayType": {
 					"level": "error",
 					"options": { "syntax": "shorthand" }
