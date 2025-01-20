@@ -8,6 +8,11 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  body {
+    color: ${props => props.theme.colors.textMain};
+    background-color: ${props => props.theme.colors.backgroundMain};
+  }
+
   a {
     cursor: pointer;
     text-decoration: none;

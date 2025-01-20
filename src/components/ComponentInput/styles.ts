@@ -16,7 +16,11 @@ export const InputContainer = styled.label`
   padding: 5px 10px;
 
   &:focus-within {
-    border-color: blue;
+    border-color: ${props => props.theme.colors.primary1};
+  }
+
+  &.error {
+    border-color: ${props => props.theme.colors.danger}
   }
 `;
 

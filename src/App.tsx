@@ -3,13 +3,17 @@ import { BrowserRouter } from 'react-router-dom';
 
 import AppRoutes from './routes';
 import GlobalStyle from './styles';
+import { ThemeProvider } from 'styled-components';
+import theme from './styles/themes';
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppRoutes />
-      <GlobalStyle />
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <AppRoutes />
+        <GlobalStyle />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
