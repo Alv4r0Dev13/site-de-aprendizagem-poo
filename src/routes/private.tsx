@@ -1,22 +1,26 @@
 import React from 'react';
-import { PrivateRouteI } from '../utils/components';
+import { PrivateRouteI } from '../utils/types/components';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { getStorage } from '../services/storage';
+import { useUser } from '../context/user';
 
 const PrivateRoute: React.FC<PrivateRouteI> = ({ children }) => {
   const location = useLocation();
-  const user = getStorage('user');
+  const { user, setUser } = useUser();
+  const storedUser = getStorage('user');
   if (!user) {
-    return (
-      <Navigate
-        to="/login"
-        state={{ ...location.state, prev: location.pathname }}
-      />
-    );
+    if (storedUser) setUser(storedUser);
+    else
+      return (
+        <Navigate
+          to="/login"
+          state={{ ...location.state, prev: location.pathname }}
+        />
+      );
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export default PrivateRoute;
