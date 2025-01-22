@@ -8,7 +8,7 @@ import { useUser } from '../context/user';
 const PrivateRoute: React.FC<PrivateRouteI> = ({ children }) => {
   const location = useLocation();
   const { user, setUser } = useUser();
-  const storedUser = getStorage('user');
+  const storedUser = getStorage(process.env.REACT_APP_STORAGE_USER || 'user');
   if (!user) {
     if (storedUser) setUser(storedUser);
     else

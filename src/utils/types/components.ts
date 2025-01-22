@@ -27,3 +27,11 @@ export interface StyledButtonI {
   $color: Required<ComponentButtonI>['color'];
   $outlined?: boolean;
 }
+
+export interface HeaderI {
+  page?: string;
+}
+
+export interface PageLinkI {
+  $selected?: boolean;
+}

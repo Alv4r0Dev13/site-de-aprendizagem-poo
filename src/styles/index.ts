@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     cursor: pointer;
+    color: ${props => props.theme.colors.textMain};
     text-decoration: none;
   }
 
@@ -33,6 +34,10 @@ const GlobalStyle = createGlobalStyle`
 
   button:disabled {
     cursor: not-allowed;
+  }
+
+  *::placeholder {
+    color: ${props => props.theme.colors.placeholder};
   }
 `;
 
