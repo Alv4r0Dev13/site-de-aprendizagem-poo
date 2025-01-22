@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { ComponentInputI } from '../../utils/components';
+import { ComponentInputI } from '../../utils/types/components';
 import {
   CharCount,
   Container,
+  ErrorMessage,
   Input,
   InputContainer,
+  InputInfo,
   Label,
   ShowPasswordButton,
 } from './styles';
@@ -13,10 +15,13 @@ import { EyeFilled, EyeInvisibleFilled } from '@ant-design/icons';
 const ComponentInput: React.FC<ComponentInputI> = ({
   label,
   error,
+  errorMessage,
   name,
   type,
   onChange,
   maxLength,
+  placeholder,
+  showCharCount,
   ...props
 }) => {
   const [passwordShow, setPasswordShow] = useState(false);
@@ -32,7 +37,7 @@ const ComponentInput: React.FC<ComponentInputI> = ({
   return (
     <Container>
       {label && <Label htmlFor={props.id}>{label}</Label>}
-      <InputContainer style={{ borderColor: error ? 'red' : undefined }}>
+      <InputContainer className={error ? 'error' : ''}>
         <Input
           type={inputType}
           onChange={e => {
@@ -40,6 +45,11 @@ const ComponentInput: React.FC<ComponentInputI> = ({
             if (maxLength) setCharCount(e.currentTarget.value.length);
           }}
           maxLength={maxLength}
+          placeholder={
+            inputType === 'password'
+              ? placeholder?.replace(/\w/g, '•')
+              : placeholder
+          }
           {...props}
         />
         {type === 'password' && (
@@ -48,11 +58,18 @@ const ComponentInput: React.FC<ComponentInputI> = ({
           </ShowPasswordButton>
         )}
       </InputContainer>
-      {maxLength && (
-        <CharCount>
-          {charCount}/{maxLength}
-        </CharCount>
-      )}
+      <InputInfo>
+        {error
+          ? errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>
+          : null}
+        {showCharCount
+          ? maxLength && (
+              <CharCount>
+                {charCount}/{maxLength}
+              </CharCount>
+            )
+          : null}
+      </InputInfo>
     </Container>
   );
 };

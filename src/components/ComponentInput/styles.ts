@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: 'column';
+  flex-direction: column;
 `;
 
 export const Label = styled.label`
@@ -40,9 +40,16 @@ export const ShowPasswordButton = styled.div`
   border: none;
 `;
 
-export const CharCount = styled.p`
-  color: grey;
-  text-align: right;
+export const InputInfo = styled.div`
   font-size: 13px;
-  padding: 0 10px;
+  padding: 2px 12px 0;
+`;
+
+export const ErrorMessage = styled.p`
+  color: ${props => props.theme.colors.danger};
+`;
+
+export const CharCount = styled.p`
+  color: ${props => props.theme.colors.textLight};
+  margin-left: auto;
 `;

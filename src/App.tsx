@@ -5,13 +5,16 @@ import AppRoutes from './routes';
 import GlobalStyle from './styles';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/themes';
+import UserProvider from './context/user';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <AppRoutes />
-        <GlobalStyle />
+        <UserProvider>
+          <AppRoutes />
+          <GlobalStyle />
+        </UserProvider>
       </BrowserRouter>
     </ThemeProvider>
   );

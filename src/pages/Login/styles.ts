@@ -27,12 +27,6 @@ export const Title = styled.h1`
 
 export const InputContainer = styled.div``;
 
-export const ErrorMessage = styled.p`
-  color: ${props => props.theme.colors.danger};
-  font-size: 13px;
-  margin: 5px 12px 0;
-`;
-
 export const AccountMessage = styled.p`
   font-size: 13px;
   text-align: center;

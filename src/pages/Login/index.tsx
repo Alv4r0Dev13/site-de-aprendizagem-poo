@@ -1,45 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from '../../services/axios';
-import { setStorage } from '../../services/storage';
+import { getStorage, setStorage } from '../../services/storage';
 import {
   AccountMessage,
   InputContainer,
   Container,
-  ErrorMessage,
   MessageLink,
   SendButton,
   Title,
   Content,
 } from './styles';
 import ComponentInput from '../../components/ComponentInput';
-import { APIResponseReject } from '../../utils/types';
-import { ErrorType } from '../../utils/enum';
+import { useUser } from '../../context/user';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
+const Login: React.FC = () => {
+  const { user, setUser } = useUser();
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
   const [loginError, setLoginError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [formError, setFormError] = useState('');
 
   const { state } = useLocation();
   const navigate = useNavigate();
 
   function handleErrors() {
-    setEmailError('');
-    setPasswordError('');
     setLoginError('');
+    setPasswordError('');
+    setFormError('');
 
     let isError = false;
-    const emailTemplate = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g);
-    if (!email) {
-      setEmailError('Preencha este campo!');
-      isError = true;
-    }
-    if (email && !emailTemplate.test(email)) {
-      setEmailError('Email inválido!');
+    if (!login) {
+      setLoginError('Preencha este campo!');
       isError = true;
     }
     if (!password) {
@@ -53,58 +47,51 @@ const Login = () => {
   async function handleLogin() {
     if (handleErrors()) return;
     await axios
-      .post('/users/login', { email, password })
+      .post('/users/login', { login, password })
       .then(
         // OK
         resp => {
-          console.log(resp.data.payload);
-          setStorage('user', resp.data.payload);
+          setUser(resp.data);
+          setStorage('user', resp.data);
           if (state) navigate(state.prev, { state });
           else navigate('/');
         },
 
         // NOT FOUND or SERVER ERROR
-        (reason: APIResponseReject) => {
-          const data = reason.response.data;
-          console.log(data);
-          for (const err of data.errors) {
-            switch (err.type) {
-              case ErrorType.EMAIL:
-                setEmailError(err.message);
-                break;
-              case ErrorType.PASSWORD:
-                setPasswordError(err.message);
-                break;
-              case ErrorType.SERVER:
-                setLoginError(err.message);
-                break;
-            }
-          }
+        reason => {
+          console.log(reason);
         },
       )
       .catch(err => {
         console.log(err);
-        setEmailError('Ocorreu um erro no servidor');
+        setLoginError('Ocorreu um erro no servidor');
       });
   }
+
+  useEffect(() => {
+    if (user || getStorage('user')) {
+      navigate(-1);
+      return;
+    }
+  }, [navigate, user]);
 
   return (
     <Container>
       <Content>
-        <Title>Fazer login</Title>
+        <Title>Entrar na conta</Title>
         <InputContainer>
           <ComponentInput
-            label="Email"
+            label="E-mail ou nome de usuário"
             type="text"
-            name="email"
-            id="email"
+            name="login"
+            id="login"
             placeholder="seu_email@email.com"
-            error={!!loginError || !!emailError}
-            value={email}
-            onChange={e => setEmail(e.target.value)}
+            error={!!formError || !!loginError}
+            errorMessage={formError || loginError}
+            value={login}
+            onChange={e => setLogin(e.target.value)}
             autoFocus
           />
-          <ErrorMessage>{loginError || emailError || ''}</ErrorMessage>
         </InputContainer>
         <InputContainer>
           <ComponentInput
@@ -112,12 +99,12 @@ const Login = () => {
             type="password"
             name="password"
             id="password"
-            placeholder="************"
-            error={!!loginError || !!passwordError}
+            placeholder="minha_Senha123"
+            error={!!formError || !!passwordError}
+            errorMessage={passwordError}
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
-          <ErrorMessage>{passwordError || ''}</ErrorMessage>
         </InputContainer>
         <SendButton type="button" onClick={handleLogin}>
           Entrar

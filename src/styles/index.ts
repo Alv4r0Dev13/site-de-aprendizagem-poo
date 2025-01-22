@@ -24,8 +24,15 @@ const GlobalStyle = createGlobalStyle`
 
   button {
     cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    text-transform: uppercase;
     border: none;
     border-radius: 10px;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
   }
 `;
 

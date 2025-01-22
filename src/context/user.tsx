@@ -29,8 +29,6 @@ const UserProvider: React.FC<UserProviderI> = ({ children }) => {
     setLoggedUser(null);
   }
 
-  updateUser({});
-
   return (
     <UserContext.Provider
       value={{ user: loggedUser, setUser, updateUser, removeUser }}
