@@ -6,6 +6,7 @@ import GlobalStyle from './styles';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/themes';
 import UserProvider from './context/user';
+import GlobalFonts from './styles/fonts';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <UserProvider>
           <AppRoutes />
+          <GlobalFonts />
           <GlobalStyle />
         </UserProvider>
       </BrowserRouter>

@@ -9,8 +9,18 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    font-family: 'Rubik';
     color: ${props => props.theme.colors.textMain};
     background-color: ${props => props.theme.colors.backgroundMain};
+  }
+
+  h1, h2, h3 {
+    font-family: 'Aleo';
+    font-weight: 300;
+  }
+
+  code {
+    font-family: 'Fira Code';
   }
 
   a {

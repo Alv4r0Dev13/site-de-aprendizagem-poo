@@ -8,6 +8,7 @@ const theme = {
     textLight: '#7D8990',
     textButton: '#FFFFFF',
     placeholder: '#BCC9D1',
+    white: '#FFFFFF',
     backgroundMain: '#F9FDFF',
     backgroundDark: '#7D8990',
     success: '#35EE72',
