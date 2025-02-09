@@ -8,3 +8,22 @@ export type User = {
 };
 
 export type LoggedUser = User & { token: string };
+
+export type Article = {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type CourseArticle = Article & {
+  course: string;
+  number: number;
+};
+
+export type BlogArticle = Article & {
+  author: string;
+  tags: string[];
+};

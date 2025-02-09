@@ -1,4 +1,5 @@
 import React from 'react';
+import { Article } from './entities';
 
 export interface PrivateRouteI {
   children: React.ReactNode;
@@ -34,4 +35,9 @@ export interface HeaderI {
 
 export interface PageLinkI {
   $selected?: boolean;
+}
+
+export interface ArticleRendererI {
+  article: Article | null;
+  isLoading: boolean;
 }
