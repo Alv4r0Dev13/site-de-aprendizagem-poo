@@ -6,10 +6,11 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     outline: none;
     box-sizing: border-box;
-  }
+  };
 
   body {
     font-family: 'Rubik';
+    font-size: 20px;
     color: ${props => props.theme.colors.textMain};
     background-color: ${props => props.theme.colors.backgroundMain};
   }
@@ -21,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
 
   code {
     font-family: 'Fira Code';
+    font-size: 18px;
   }
 
   a {

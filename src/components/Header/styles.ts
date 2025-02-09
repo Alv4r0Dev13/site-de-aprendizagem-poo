@@ -27,6 +27,7 @@ export const LinksContainer = styled.div`
 
 export const PageLink = styled(Link)<PageLinkI>`
   color: ${({ $selected, theme }) => ($selected ? theme.colors.primary1 : 'inherit')};
+  font-size: 16px;
 `;
 
 export const SearchBar = styled.div`
@@ -54,6 +55,7 @@ export const SearchIcon = styled.div`
 export const User = styled.div`
   display: flex;
   gap: 10px;
+  font-size: 16px;
 `;
 
 export const Avatar = styled.img`
@@ -92,4 +94,5 @@ export const UserDataType = styled.p`
 export const UserActions = styled.div`
   display: flex;
   gap: 20px;
+  font-size: 16px;
 `;
