@@ -8,21 +8,39 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   };
 
+  html {
+    font-size: 16px;
+  }
+
   body {
     font-family: 'Rubik';
-    font-size: 20px;
+    font-size: ${props => props.theme.sizes.regular};
     color: ${props => props.theme.colors.textMain};
     background-color: ${props => props.theme.colors.backgroundMain};
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3 {
     font-family: 'Aleo';
-    font-weight: 300;
+    font-weight: ${props => props.theme.weights.semiBold};
+  }
+
+  h1 {
+    font-size: ${props => props.theme.sizes.largest};
+  }
+
+  h2 {
+    font-size: ${props => props.theme.sizes.large};
+  }
+
+  h3 {
+    font-size: ${props => props.theme.sizes.mediumLarge};
   }
 
   code {
     font-family: 'Fira Code';
-    font-size: 18px;
+    font-size: ${props => props.theme.sizes.mediumSmall};
   }
 
   a {
@@ -35,10 +53,19 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: underline;
   }
 
+  input {
+    font-family: 'Rubik';
+    font-size: ${props => props.theme.sizes.regular};
+
+    &::placeholder {
+      color: ${props => props.theme.colors.placeholder};
+    }
+  }
+
   button {
     cursor: pointer;
     font-weight: bold;
-    font-size: 15px;
+    font-size: ${props => props.theme.sizes.mediumSmall};
     text-transform: uppercase;
     border: none;
     border-radius: 10px;

@@ -17,6 +17,11 @@ export interface ComponentInputI
   showCharCount?: boolean;
 }
 
+export interface InputLabelPropsI
+  extends React.LabelHTMLAttributes<HTMLLabelElement> {
+  $inputHasText?: boolean;
+}
+
 export interface ComponentButtonI
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   color?: 'default' | 'success' | 'alert' | 'danger';

@@ -1,18 +1,28 @@
 import styled from 'styled-components';
+import { InputLabelPropsI } from '../../utils/types/components';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+
+  &:focus-within label {
+    cursor: default;
+    top: 0;
+  }
 `;
 
-export const Label = styled.label`
-  margin-left: 12px;
+export const Label = styled.label<InputLabelPropsI>`
+  cursor: text;
+  position: relative;
+  margin-left: 10px;
+  width: fit-content;
+  top: ${({ $inputHasText }) => ($inputHasText ? 0 : 23)}px;
+  transition: top 50ms ease-in;
 `;
 
 export const InputContainer = styled.label`
   display: flex;
-  border: 2px solid black;
-  border-radius: 10px;
+  border-bottom: 2px solid ${props => props.theme.colors.placeholder};
   padding: 5px 10px;
 
   &:focus-within {
@@ -29,9 +39,18 @@ export const Input = styled.input`
   background: none;
   border: none;
   font-size: 15px;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:focus::placeholder {
+    color: ${props => props.theme.colors.placeholder};
+  }
 `;
 
 export const ShowPasswordButton = styled.div`
+  cursor: pointer;
   display: flex;
   color: black;
   font-size: 18px;

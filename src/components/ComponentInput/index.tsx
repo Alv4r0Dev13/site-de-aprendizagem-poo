@@ -24,6 +24,7 @@ const ComponentInput: React.FC<ComponentInputI> = ({
   showCharCount,
   ...props
 }) => {
+  const [value, setValue] = useState('');
   const [passwordShow, setPasswordShow] = useState(false);
   const [inputType, setInputType] = useState(type);
   const [charCount, setCharCount] = useState(0);
@@ -36,12 +37,17 @@ const ComponentInput: React.FC<ComponentInputI> = ({
 
   return (
     <Container>
-      {label && <Label htmlFor={props.id}>{label}</Label>}
+      {label && (
+        <Label htmlFor={props.id} $inputHasText={!!value}>
+          {label}
+        </Label>
+      )}
       <InputContainer className={error ? 'error' : ''}>
         <Input
           type={inputType}
           onChange={e => {
             onChange?.(e);
+            setValue(e.currentTarget.value);
             if (maxLength) setCharCount(e.currentTarget.value.length);
           }}
           maxLength={maxLength}

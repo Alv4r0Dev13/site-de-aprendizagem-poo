@@ -56,14 +56,14 @@ const Header: React.FC<HeaderI> = ({ page }) => {
     <Container>
       <Logo onClick={() => navigate('/')}>Quebracódigos</Logo>
       <LinksContainer>
-        <PageLink to={''} $selected={page === 'maincourse'}>
-          Curso de POO
+        <PageLink to={''} $selected={page === 'courses'}>
+          Cursos
         </PageLink>
         <PageLink to={''} $selected={page === 'blog'}>
           Blog
         </PageLink>
         <PageLink to={''} $selected={page === 'qna'}>
-          Conectando-se
+          Fórum
         </PageLink>
       </LinksContainer>
       <SearchBar>

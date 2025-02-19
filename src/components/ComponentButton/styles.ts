@@ -27,7 +27,7 @@ export const Button = styled.button<StyledButtonI>`
       let color;
       switch ($color) {
         case 'default':
-          color = theme.colors.primary1;
+          color = theme.colors.primary2;
           break;
         case 'success':
           color = theme.colors.successLight;

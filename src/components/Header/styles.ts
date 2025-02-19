@@ -20,7 +20,7 @@ export const Logo = styled.div`
 export const LinksContainer = styled.div`
   flex: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 40px;
   max-width: 30%;
 `;
@@ -32,19 +32,24 @@ export const PageLink = styled(Link)<PageLinkI>`
 
 export const SearchBar = styled.div`
   display: flex;
-  border: 2px solid ${props => props.theme.colors.primary1};
-  border-radius: 20px;
+  border-bottom: 2px solid ${props => props.theme.colors.placeholder};
+  /* border-radius: 20px; */
   align-items: center;
   gap: 10px;
   width: 30%;
   min-width: 300px;
   padding: 2px 10px;
+
+  &:focus-within {
+    border-color: ${props => props.theme.colors.primary1};
+  }
 `;
 
 export const SearchInput = styled.input`
   flex: 1;
   border: none;
   outline: none;
+  background: none;
 `;
 
 export const SearchIcon = styled.div`

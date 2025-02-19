@@ -7,12 +7,13 @@ import {
   InputContainer,
   Container,
   MessageLink,
-  SendButton,
   Title,
   Content,
+  TitleContainer,
 } from './styles';
 import ComponentInput from '../../components/ComponentInput';
 import { useUser } from '../../context/user';
+import ComponentButton from '../../components/ComponentButton';
 
 const Login: React.FC = () => {
   const { user, setUser } = useUser();
@@ -78,7 +79,9 @@ const Login: React.FC = () => {
   return (
     <Container>
       <Content>
-        <Title>Entrar na conta</Title>
+        <TitleContainer>
+          <Title>Entrar na conta</Title>
+        </TitleContainer>
         <InputContainer>
           <ComponentInput
             label="E-mail ou nome de usuário"
@@ -106,9 +109,9 @@ const Login: React.FC = () => {
             onChange={e => setPassword(e.target.value)}
           />
         </InputContainer>
-        <SendButton type="button" onClick={handleLogin}>
+        <ComponentButton type="button" onClick={handleLogin}>
           Entrar
-        </SendButton>
+        </ComponentButton>
         <AccountMessage>
           Ainda não tem uma conta?{' '}
           <MessageLink to="/register" state={state}>
