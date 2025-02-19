@@ -1,9 +1,11 @@
-export function getStorage(key: string) {
-  return JSON.parse(localStorage.getItem(key) || 'null');
+import { base64ToObject, objectToBase64 } from "../utils/converters";
+
+export function getStorage<T = any>(key: string) {
+  return base64ToObject(localStorage.getItem(key)) as T | null;
 }
 
-export function setStorage(key: string, data: unknown) {
-  localStorage.setItem(key, JSON.stringify(data));
+export function setStorage(key: string, data: any) {
+  localStorage.setItem(key, objectToBase64(data));
 }
 
 export function removeStorage(key: string) {

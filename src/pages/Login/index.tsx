@@ -53,7 +53,7 @@ const Login: React.FC = () => {
         // OK
         resp => {
           setUser(resp.data);
-          setStorage('user', resp.data);
+          setStorage(`${process.env.REACT_APP_STORAGE_USER}`, resp.data);
           if (state) navigate(state.prev, { state });
           else navigate('/');
         },
