@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from '../../services/axios';
+import api from '../../services/api';
 import { getStorage, setStorage } from '../../services/storage';
 import {
   AccountMessage,
@@ -47,7 +47,7 @@ const Login: React.FC = () => {
 
   async function handleLogin() {
     if (handleErrors()) return;
-    await axios
+    await api
       .post('/users/login', { login, password })
       .then(
         // OK

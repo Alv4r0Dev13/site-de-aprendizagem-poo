@@ -28,7 +28,9 @@ const CourseCard: React.FC<CourseCardI> = ({ course }) => {
       <Content>
         <CourseHeader>
           <Title>{course.name}</Title>
-          <Classes>{course.classes} aulas</Classes>
+          <Classes>
+            {course.classes || 'Nenhuma'} aula{course.classes > 1 ? 's' : ''}
+          </Classes>
         </CourseHeader>
         <Description>{course.description}</Description>
       </Content>

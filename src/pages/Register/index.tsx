@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from '../../services/axios';
+import api from '../../services/api';
 import { getStorage, setStorage } from '../../services/storage';
 import {
   AccountMessage,
@@ -66,7 +66,7 @@ const Register: React.FC = () => {
 
   async function handleSignin() {
     if (handleErrors()) return;
-    await axios
+    await api
       .post('/users', { username, email, password, type: userType })
       .then(
         // OK

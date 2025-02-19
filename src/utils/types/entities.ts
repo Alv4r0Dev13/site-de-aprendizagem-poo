@@ -1,4 +1,4 @@
-import { UserType } from './enum';
+import { CourseType, UserType } from './enum';
 
 export type User = {
   username: string;
@@ -13,6 +13,7 @@ export type Course = {
   id: string;
   name: string;
   description: string;
+  type: CourseType;
   classes: number;
   thumbnailUrl?: string;
   createdAt: Date;

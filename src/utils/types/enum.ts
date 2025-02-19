@@ -3,3 +3,8 @@ export enum UserType {
   TEACHER = 'TEACHER',
   ADMIN = 'ADMIN',
 }
+
+export enum CourseType {
+  MAIN = 'MAIN',
+  LANGUAGE = 'LANGUAGE',
+}
