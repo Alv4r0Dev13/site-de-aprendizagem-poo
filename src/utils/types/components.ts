@@ -1,5 +1,5 @@
 import React from 'react';
-import { Article } from './entities';
+import { Article, Course } from './entities';
 
 export interface PrivateRouteI {
   children: React.ReactNode;
@@ -47,4 +47,8 @@ export interface PageLinkI {
 export interface ArticleRendererI {
   article: Article | null;
   isLoading: boolean;
+}
+
+export interface CourseCardI {
+  course: Course;
 }

@@ -9,6 +9,16 @@ export type User = {
 
 export type LoggedUser = User & { token: string };
 
+export type Course = {
+  id: string;
+  name: string;
+  description: string;
+  classes: number;
+  thumbnailUrl?: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 export type Article = {
   id: string;
   title: string;
