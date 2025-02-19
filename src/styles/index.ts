@@ -24,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
   h1, h2, h3 {
     font-family: 'Aleo';
     font-weight: ${props => props.theme.weights.semiBold};
+    font-variation-settings: "wght" ${props => props.theme.weights.semiBold};
   }
 
   h1 {
