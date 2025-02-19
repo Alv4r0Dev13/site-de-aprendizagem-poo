@@ -60,7 +60,10 @@ const Login: React.FC = () => {
 
         // NOT FOUND or SERVER ERROR
         reason => {
-          console.log(reason);
+          const resp = reason.response.data;
+          console.log(resp);
+          if (resp.statusCode === 404) setLoginError(resp.message);
+          if (resp.statusCode === 401) setPasswordError(resp.message);
         },
       )
       .catch(err => {
