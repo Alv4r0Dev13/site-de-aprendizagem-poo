@@ -12,6 +12,7 @@ export interface UserProviderI {
 export interface ComponentInputI
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  required?: boolean;
   error?: boolean;
   errorMessage?: string;
   showCharCount?: boolean;
@@ -26,12 +27,13 @@ export interface ComponentButtonI
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   color?: 'default' | 'success' | 'alert' | 'danger';
   outlined?: boolean;
-  // children?: React.ReactNode;
+  centered?: boolean;
 }
 
-export interface StyledButtonI {
+export interface ButtonPropsI {
   $color: Required<ComponentButtonI>['color'];
   $outlined?: boolean;
+  $centered?: boolean;
 }
 
 export interface HeaderI {

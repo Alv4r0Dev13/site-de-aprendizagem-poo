@@ -12,15 +12,25 @@ export const Container = styled.div`
 `;
 
 export const Label = styled.label<InputLabelPropsI>`
-  cursor: text;
   position: relative;
   margin-left: 10px;
   width: fit-content;
   top: ${({ $inputHasText }) => ($inputHasText ? 0 : 23)}px;
   transition: top 50ms ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+`;
+
+export const Required = styled.span`
+  color: ${props => props.theme.colors.danger};
+  font-size: ${props => props.theme.sizes.small};
 `;
 
 export const InputContainer = styled.label`
+  cursor: text;
   display: flex;
   border-bottom: 2px solid ${props => props.theme.colors.placeholder};
   padding: 5px 10px;

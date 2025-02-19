@@ -8,12 +8,14 @@ import {
   InputContainer,
   InputInfo,
   Label,
+  Required,
   ShowPasswordButton,
 } from './styles';
 import { EyeFilled, EyeInvisibleFilled } from '@ant-design/icons';
 
 const ComponentInput: React.FC<ComponentInputI> = ({
   label,
+  required,
   error,
   errorMessage,
   name,
@@ -39,7 +41,8 @@ const ComponentInput: React.FC<ComponentInputI> = ({
     <Container>
       {label && (
         <Label htmlFor={props.id} $inputHasText={!!value}>
-          {label}
+          {label}{' '}
+          {required ? <Required title={'Campo obrigatório'}>*</Required> : null}
         </Label>
       )}
       <InputContainer className={error ? 'error' : ''}>

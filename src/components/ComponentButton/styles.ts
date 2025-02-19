@@ -1,14 +1,14 @@
 import styled, { css } from 'styled-components';
-import { StyledButtonI } from '../../utils/types/components';
+import { ButtonPropsI } from '../../utils/types/components';
 
-export const Button = styled.button<StyledButtonI>`
-  margin: 0 auto;
+export const Button = styled.button<ButtonPropsI>`
   padding: 10px 20px;
 
-  ${({ theme, $color, $outlined }) => {
+  ${({ theme, $color, $outlined, $centered }) => {
     const color = theme.colors[$color === 'default' ? 'primary1' : $color];
     return css`
       border: 2px solid ${color};
+      ${() => ($centered ? css`margin: 0 auto;` : '')}
       ${() =>
         $outlined
           ? css`
