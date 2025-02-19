@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { PageLinkI } from '../../utils/types/components';
 
 export const Container = styled.div`
+  position: sticky;
   display: flex;
   gap: 50px;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid ${props => props.theme.colors.primary1};
+  box-shadow: 0 4px 4px rgba(0,0,0,0.3);
   height: 80px;
   padding: 0 100px;
 `;
