@@ -56,7 +56,7 @@ const Header: React.FC<HeaderI> = ({ page }) => {
     <Container>
       <Logo onClick={() => navigate('/')}>Quebracódigos</Logo>
       <LinksContainer>
-        <PageLink to={''} $selected={page === 'courses'}>
+        <PageLink to={'courses'} $selected={page === 'courses'}>
           Cursos
         </PageLink>
         <PageLink to={''} $selected={page === 'blog'}>

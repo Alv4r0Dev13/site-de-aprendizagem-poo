@@ -16,6 +16,10 @@ export type Course = {
   type: CourseType;
   classes: number;
   thumbnailUrl?: string;
+  author?: {
+    id: string;
+    username: string;
+  };
   createdAt: Date;
   updatedAt: Date;
 };

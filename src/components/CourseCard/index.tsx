@@ -5,6 +5,8 @@ import {
   Classes,
   Container,
   Content,
+  Author,
+  CourseDetails,
   CourseHeader,
   Description,
   NoThumb,
@@ -28,9 +30,12 @@ const CourseCard: React.FC<CourseCardI> = ({ course }) => {
       <Content>
         <CourseHeader>
           <Title>{course.name}</Title>
-          <Classes>
-            {course.classes || 'Nenhuma'} aula{course.classes > 1 ? 's' : ''}
-          </Classes>
+          <CourseDetails>
+            {course.author && <Author>{course.author.username}</Author>}
+            <Classes>
+              {course.classes || 'Nenhuma'} aula{course.classes > 1 ? 's' : ''}
+            </Classes>
+          </CourseDetails>
         </CourseHeader>
         <Description>{course.description}</Description>
       </Content>

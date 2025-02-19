@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ComponentButton from '../../components/ComponentButton';
 
 export const Container = styled.div`
   padding: 80px 10%;
@@ -28,11 +27,6 @@ export const Section = styled.section`
   h1 {
     margin-left: 16px;
   }
-`;
-
-export const SectionButton = styled(ComponentButton)`
-  width: fit-content;
-  margin: 16px 0 0 32px;
 `;
 
 export const MainCoursesSection = styled(Section)`

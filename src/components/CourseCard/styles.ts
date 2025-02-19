@@ -57,9 +57,19 @@ export const CourseHeader = styled.div`
 
 export const Title = styled.h2``;
 
+export const CourseDetails = styled.div`
+  display: flex;
+  gap: 24px;
+  align-content: center;
+`;
+
+export const Author = styled.p`
+  font-size: ${props => props.theme.sizes.small};
+`;
+
 export const Classes = styled.p`
   color: ${props => props.theme.colors.textLight};
-  font-size: 13px;
+  font-size: ${props => props.theme.sizes.small};
 `;
 
 export const Description = styled.p`

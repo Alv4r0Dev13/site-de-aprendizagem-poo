@@ -7,29 +7,23 @@ import {
   MainCoursesSection,
   NoCourses,
   Section,
-  SectionButton,
 } from './styles';
 import CourseCard from '../../components/CourseCard';
 import { Course } from '../../utils/types/entities';
 import { FileUnknownOutlined, LoadingOutlined } from '@ant-design/icons';
 import { fetchData } from '../../utils/functions';
-import { CourseType } from '../../utils/types/enum';
-import { useNavigate } from 'react-router-dom';
 
-const Home: React.FC = () => {
+const CoursesHome: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [courses, setCourses] = useState<Course[]>([]);
   const [mainCourses, setMainCourses] = useState<Course[]>();
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-      const main = await fetchData<Course[]>(`/course/type/${CourseType.MAIN}`);
-      const other = await fetchData<Course[]>(
-        `/course/type/!${CourseType.MAIN}?limit=4`,
-      );
+      const main = await fetchData<Course[]>('/course/type/MAIN');
+      const other = await fetchData<Course[]>('/course/type/!MAIN?limit=30');
+      console.log(other?.[0]);
       if (main) setMainCourses(main);
       if (other) setCourses(other);
       setIsLoading(false);
@@ -45,11 +39,18 @@ const Home: React.FC = () => {
       ) : (
         <>
           <MainCoursesSection>
-            <h1>Cursos Principais</h1>
+            <h1>Nossos Cursos</h1>
             <p>
-              Venha aprender sobre Programação Orientada a Objetos com o curso
-              de POO com Java da Quebracódigos.com!
+              A <span className="bold">Quebracódigos.com</span> foi criada com o
+              intúito de ajudar o estudante de programação na jornada de
+              aprendizado da Programação Orientada a Objetos.
             </p>
+            <p>
+              Os cursos abaixo foram criados com carinho pelo prório criador do
+              site e podem ser acessados a qualquer momento, completamente de
+              graça!
+            </p>
+            <p>Bons estudos!</p>
             {mainCourses && mainCourses.length ? (
               <Courses>
                 {mainCourses.map((course, i) => (
@@ -71,12 +72,6 @@ const Home: React.FC = () => {
                   <CourseCard key={i} course={course} />
                 ))}
               </Courses>
-              <SectionButton
-                // centered={false}
-                onClick={() => navigate('/courses')}
-              >
-                Ver mais
-              </SectionButton>
             </Section>
           ) : null}
         </>
@@ -85,4 +80,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default CoursesHome;

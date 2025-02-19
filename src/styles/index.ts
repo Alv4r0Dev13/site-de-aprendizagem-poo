@@ -79,6 +79,19 @@ const GlobalStyle = createGlobalStyle`
   *::placeholder {
     color: ${props => props.theme.colors.placeholder};
   }
+
+  .bold {
+    font-weight: ${props => props.theme.weights.semiBold};
+    font-variation-settings: "wght" ${props => props.theme.weights.semiBold};
+  }
+
+  .italic {
+    font-style: italic;
+  }
+
+  .underlined {
+    text-decoration: underline;
+  }
 `;
 
 export default GlobalStyle;

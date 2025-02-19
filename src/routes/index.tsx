@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Header from '../components/Header';
 import Register from '../pages/Register';
+import CoursesHome from '../pages/CoursesHome';
 
 const AppRoutes = () => {
   return (
@@ -14,6 +15,15 @@ const AppRoutes = () => {
           <>
             <Header />
             <Home />
+          </>
+        }
+      />
+      <Route
+        path="/courses"
+        element={
+          <>
+            <Header page={'courses'} />
+            <CoursesHome />
           </>
         }
       />
