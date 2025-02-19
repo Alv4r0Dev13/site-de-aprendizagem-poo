@@ -1,7 +1,16 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 20px 10%;
+  padding: 80px 10%;
+`;
+
+export const Loading = styled.div`
+  span {
+    display: block;
+    color: ${props => props.theme.colors.primary1};
+    font-size: 50px;
+    margin: 16px auto 0;
+  }
 `;
 
 export const Section = styled.section`
