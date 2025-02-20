@@ -16,10 +16,17 @@ import {
 import { CourseCardI } from '../../utils/types/components';
 import { FileTextOutlined } from '@ant-design/icons';
 import ComponentButton from '../ComponentButton';
+import { useNavigate } from 'react-router-dom';
 
 const CourseCard: React.FC<CourseCardI> = ({ course }) => {
+  const navigate = useNavigate();
+
   return (
-    <Container>
+    <Container
+      onClick={() =>
+        navigate(`/course/${course.id}?tab=about`, { state: { course } })
+      }
+    >
       {course.thumbnailUrl ? (
         <Thumbnail />
       ) : (

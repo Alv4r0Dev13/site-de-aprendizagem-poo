@@ -32,6 +32,9 @@ const theme = {
     medium: 500,
     regular: 400,
   },
+  shadow: {
+    default: '0 4px 4px #0000004d',
+  },
 };
 
 export default theme;

@@ -52,3 +52,7 @@ export interface ArticleRendererI {
 export interface CourseCardI {
   course: Course;
 }
+
+export interface TabPropsI {
+  $selected?: boolean;
+}
