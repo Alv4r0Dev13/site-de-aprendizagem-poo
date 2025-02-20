@@ -19,7 +19,8 @@ export const Container = styled.div`
     margin-bottom: 20px;
   }
 
-  p.alt-text {
+  .alt-text {
+    display: block;
     font-size: 15px;
     font-style: italic;
     text-align: center;

@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Header from '../components/Header';
 import Register from '../pages/Register';
 import CoursesHome from '../pages/CoursesHome';
+import ArticlePage from '../pages/ArticlePage';
 import CoursePage from '../pages/CoursePage';
 
 const AppRoutes = () => {
@@ -34,6 +35,15 @@ const AppRoutes = () => {
           <>
             <Header />
             <CoursePage />
+          </>
+        }
+      />
+      <Route
+        path="/article/:slug"
+        element={
+          <>
+            <Header />
+            <ArticlePage />
           </>
         }
       />

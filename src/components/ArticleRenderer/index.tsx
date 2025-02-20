@@ -37,7 +37,7 @@ const ArticleRenderer: React.FC<ArticleRendererI> = ({
               return (
                 <>
                   <img {...props} />
-                  <p className="alt-text">{alt}</p>
+                  <span className="alt-text">{alt}</span>
                 </>
               );
             },
