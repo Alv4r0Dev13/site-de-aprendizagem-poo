@@ -97,7 +97,6 @@ export const TabButton = styled.div<TabPropsI>`
   `}
 `;
 
-export const TabContent = styled.div<TabPropsI>`
-  ${props => (props.$selected ? css`display: none` : '')}
+export const TabContent = styled.div`
   margin: 0 40px 40px;
 `;

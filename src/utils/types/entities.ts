@@ -1,6 +1,7 @@
 import { CourseType, UserType } from './enum';
 
 export type User = {
+  id: string;
   username: string;
   email: string;
   type: UserType;
@@ -15,10 +16,13 @@ export type Course = {
   description: string;
   type: CourseType;
   classes: number;
+  modules: string[];
   thumbnailUrl?: string;
   author?: {
     id: string;
     username: string;
+    type: UserType;
+    avatarUrl?: string;
   };
   createdAt: Date;
   updatedAt: Date;
@@ -33,8 +37,14 @@ export type Article = {
   updatedAt: Date;
 };
 
+export type CourseModule = {
+  name: string;
+  classes: CourseArticle[];
+};
+
 export type CourseArticle = Article & {
   course: string;
+  module: string;
   number: number;
 };
 

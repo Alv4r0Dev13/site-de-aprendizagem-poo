@@ -13,19 +13,35 @@ import {
   TitleDetails,
 } from './styles';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Course } from '../../utils/types/entities';
+import {
+  Course,
+  CourseArticle,
+  CourseModule,
+} from '../../utils/types/entities';
 import { useQuery } from '../../hooks/useQuery';
 import { FileTextOutlined } from '@ant-design/icons';
+import { useUser } from '../../context/user';
+import CourseAboutTab from '../../components/CourseAboutTab';
+import CourseClassesTab from '../../components/CourseClassesTab';
+import { fetchData } from '../../utils/functions';
 
 const CoursePage: React.FC = () => {
+  const { user } = useUser();
+
   const navigate = useNavigate();
   const { state } = useLocation();
   const course: Course | null = state.course || null;
 
-  const [tab, setTab] = useState('');
+  const [tab, setTab] = useState('about');
   const query = useQuery();
 
-  function handleChangeTab(to: 'about' | 'classes' | 'comments') {
+  const [isAuthor, setIsAuthor] = useState(false);
+  const [modules, setModules] = useState<CourseModule[]>([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  function handleChangeTab(to: 'about' | 'classes') {
     if (!course) return;
     if (tab === to) return;
     navigate(`/course/${course.id}?tab=${to}`, { state, replace: true });
@@ -33,16 +49,53 @@ const CoursePage: React.FC = () => {
   }
 
   useEffect(() => {
-    if (!course) navigate(-1);
+    if (!course) {
+      navigate(-1);
+      return;
+    }
+
+    if (user && course.author?.id === user.id) {
+      setIsAuthor(true);
+    }
   }, []);
 
   useEffect(() => {
     const qTab = query.get('tab');
-    if (!qTab || !['about', 'classes', 'comments'].includes(qTab)) {
+    if (!qTab || !['about', 'classes'].includes(qTab)) {
       navigate(-1);
       return;
     }
     setTab(qTab);
+  }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      if (!course) return;
+      setIsLoading(true);
+      const data = await fetchData<CourseArticle[]>(
+        `/article/course/${course.id}`,
+        // resp => {
+        //   console.log(resp.data);
+        //   return resp.data;
+        // },
+        undefined,
+        reason => {
+          setIsError(true);
+          return null;
+        },
+      );
+      if (data) {
+        const mod = course.modules.map(m => {
+          const classes = data.filter(c => c.module === m);
+          return { name: m, classes };
+        });
+        setModules(mod);
+      }
+      setIsLoading(false);
+    };
+    (async () => {
+      if (course?.modules.length) await getData();
+    })();
   }, []);
 
   return course ? (
@@ -85,9 +138,21 @@ const CoursePage: React.FC = () => {
             <span>10</span>
           </TabButton> */}
         </TabNavigator>
-        <TabContent $selected={tab === 'about'}></TabContent>
-        <TabContent $selected={tab === 'classes'}></TabContent>
-        {/* <TabContent $selected={tab === 'comments'}></TabContent> */}
+        {tab === 'about' && (
+          <TabContent>
+            <CourseAboutTab course={course} />
+          </TabContent>
+        )}
+        {tab === 'classes' && (
+          <TabContent>
+            <CourseClassesTab
+              modules={modules}
+              isLoading={isLoading}
+              isError={isError}
+            />
+          </TabContent>
+        )}
+        {/* {tab === 'comments' && <TabContent></TabContent>} */}
       </Content>
     </Container>
   ) : null;

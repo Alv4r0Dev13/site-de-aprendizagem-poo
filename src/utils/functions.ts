@@ -13,6 +13,7 @@ export async function fetchData<T = any>(
   url: string,
   onFulfilled?: (value: axios.AxiosResponse<any, any>) => T | PromiseLike<T>,
   onRejected?: (reason: any) => PromiseLike<null> | null,
+  onFinally?: () => void,
 ): Promise<T | null> {
   return await api
     .get(url)
@@ -30,5 +31,6 @@ export async function fetchData<T = any>(
           console.log(err);
           return null;
         }),
-    );
+    )
+    .finally(onFinally);
 }

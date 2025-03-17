@@ -1,5 +1,5 @@
 import React from 'react';
-import { Article, Course } from './entities';
+import { Article, Course, CourseModule } from './entities';
 
 export interface PrivateRouteI {
   children: React.ReactNode;
@@ -55,4 +55,10 @@ export interface CourseCardI {
 
 export interface TabPropsI {
   $selected?: boolean;
+}
+
+export interface ClassesTabI {
+  modules: CourseModule[];
+  isLoading?: boolean;
+  isError?: boolean;
 }
