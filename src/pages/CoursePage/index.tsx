@@ -24,9 +24,11 @@ import { useUser } from '../../context/user';
 import CourseAboutTab from '../../components/CourseAboutTab';
 import CourseClassesTab from '../../components/CourseClassesTab';
 import { fetchData } from '../../utils/functions';
+import { useCourse } from '../../context/course';
 
 const CoursePage: React.FC = () => {
   const { user } = useUser();
+  const { setCourseModules } = useCourse();
 
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -97,6 +99,10 @@ const CoursePage: React.FC = () => {
       if (course?.modules.length) await getData();
     })();
   }, []);
+
+  useEffect(() => {
+    setCourseModules(modules);
+  }, [modules]);
 
   return course ? (
     <Container>

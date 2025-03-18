@@ -1,5 +1,6 @@
 import axios from 'axios';
 import api from '../services/api';
+import { BlogArticle, CourseArticle } from './types/entities';
 
 /**
  * Makes a request to the API.
@@ -33,4 +34,12 @@ export async function fetchData<T = any>(
         }),
     )
     .finally(onFinally);
+}
+
+export function isCourseArticle(
+  article: CourseArticle | BlogArticle | null,
+): article is CourseArticle {
+  if (!article) return false;
+  const a = article as any;
+  return !!a.number;
 }

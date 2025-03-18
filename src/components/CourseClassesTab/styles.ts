@@ -79,7 +79,7 @@ export const ClassContent = styled.div`
   display: flex;
   gap: 16px;
   background-color: ${props => props.theme.colors.white};
-  border-left: 2px solid ${props => props.theme.colors.placeholder};
+  border-left: 4px solid ${props => props.theme.colors.placeholder};
   border-radius: 0 10px 10px 0;
   /* padding: 16px 8px 16px 16px; */
   padding: 16px;

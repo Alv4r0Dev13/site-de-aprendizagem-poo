@@ -1,10 +1,17 @@
 import styled from 'styled-components';
+import ComponentButton from '../../components/ComponentButton';
 
 export const Container = styled.div`
-  margin: 60px 20%;
+  display: flex;
+  margin: 60px;
+`;
+
+export const SideContent = styled.div`
+  width: 300px;
 `;
 
 export const Content = styled.div`
+  flex: 1;
   position: relative;
   background-color: ${props => props.theme.colors.white};
   border-radius: 20px;
@@ -23,4 +30,15 @@ export const ArticleName = styled.h1`
   /* margin: 0 10%; */
   top: -24px;
   left: 10%;
+`;
+
+export const ArticleActions = styled.div`
+  display: flex;
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 0 16px;
+`;
+
+export const NextButton = styled(ComponentButton)`
+  margin-left: auto;
 `;

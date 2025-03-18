@@ -39,7 +39,11 @@ const CourseAboutTab: React.FC<CourseCardI> = ({ course }) => {
       </div>
       <div>
         <Title>Dados</Title>
-        <p>Criado em {course.createdAt.toLocaleString().replace(',', ' às')}</p>
+        <p>Criado em {new Date(course.createdAt).toLocaleDateString()}</p>
+        <p>
+          Última atualização feita em{' '}
+          {new Date(course.updatedAt).toLocaleDateString()}
+        </p>
       </div>
     </Container>
   );
