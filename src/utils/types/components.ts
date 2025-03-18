@@ -1,11 +1,7 @@
 import React from 'react';
 import { Article, Course, CourseModule } from './entities';
 
-export interface PrivateRouteI {
-  children: React.ReactNode;
-}
-
-export interface UserProviderI {
+export interface ContainerI {
   children: React.ReactNode;
 }
 

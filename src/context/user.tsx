@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import { NotEmptyPartial } from '../utils/types';
 import { LoggedUser } from '../utils/types/entities';
-import { UserProviderI } from '../utils/types/components';
+import { ContainerI } from '../utils/types/components';
 
 type UserContextType = {
   user: LoggedUser | null;
@@ -12,7 +12,7 @@ type UserContextType = {
 
 const UserContext = createContext<UserContextType | null>(null);
 
-const UserProvider: React.FC<UserProviderI> = ({ children }) => {
+const UserProvider: React.FC<ContainerI> = ({ children }) => {
   const [loggedUser, setLoggedUser] = useState<LoggedUser | null>(null);
 
   function setUser(user: LoggedUser): void {

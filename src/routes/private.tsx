@@ -1,11 +1,11 @@
 import React from 'react';
-import { PrivateRouteI } from '../utils/types/components';
+import { ContainerI } from '../utils/types/components';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { getStorage } from '../services/storage';
 import { useUser } from '../context/user';
 
-const PrivateRoute: React.FC<PrivateRouteI> = ({ children }) => {
+const PrivateRoute: React.FC<ContainerI> = ({ children }) => {
   const location = useLocation();
   const { user, setUser } = useUser();
   const storedUser = getStorage(process.env.REACT_APP_STORAGE_USER || 'user');
