@@ -14,6 +14,7 @@ import {
 } from './styles';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
+  AbsCourseArticle,
   Course,
   CourseArticle,
   CourseModule,
@@ -28,7 +29,7 @@ import { useCourse } from '../../context/course';
 
 const CoursePage: React.FC = () => {
   const { user } = useUser();
-  const { setCourseModules } = useCourse();
+  const { setCourseData } = useCourse();
 
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -88,7 +89,17 @@ const CoursePage: React.FC = () => {
       );
       if (data) {
         const mod = course.modules.map(m => {
-          const classes = data.filter(c => c.module === m);
+          const classes = data
+            .filter(c => c.module === m)
+            .map(c => {
+              return {
+                id: c.id,
+                title: c.title,
+                slug: c.slug,
+                number: c.number,
+                createdAt: c.createdAt,
+              };
+            });
           return { name: m, classes };
         });
         setModules(mod);
@@ -101,7 +112,9 @@ const CoursePage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setCourseModules(modules);
+    if (!course) return;
+    const classes = modules.map(m => m.classes).flat();
+    setCourseData({ id: course.id, name: course.name, modules, classes });
   }, [modules]);
 
   return course ? (

@@ -12,12 +12,12 @@ import { useCourse } from '../../context/course';
 import { useNavigate } from 'react-router-dom';
 
 const CourseSideMenu: React.FC = () => {
-  const { courseModules: modules } = useCourse();
+  const { courseData } = useCourse();
 
   return (
     <Container>
       <MenuTitle></MenuTitle>
-      {modules!.map(m => (
+      {courseData!.modules.map(m => (
         <Module key={m.name}>
           <ModuleName>{m.name}</ModuleName>
           <ModuleClasses>

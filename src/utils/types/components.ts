@@ -1,5 +1,6 @@
 import React from 'react';
 import { Article, Course, CourseModule } from './entities';
+import { LinkProps } from 'react-router-dom';
 
 export interface ContainerI {
   children: React.ReactNode;
@@ -28,6 +29,18 @@ export interface ComponentButtonI
 
 export interface ButtonPropsI {
   $color: Required<ComponentButtonI>['color'];
+  $outlined?: boolean;
+  $centered?: boolean;
+}
+
+export interface ComponentButtonLinkI extends LinkProps {
+  color?: 'default' | 'success' | 'alert' | 'danger';
+  outlined?: boolean;
+  centered?: boolean;
+}
+
+export interface ButtonLinkPropsI {
+  $color: Required<ComponentButtonLinkI>['color'];
   $outlined?: boolean;
   $centered?: boolean;
 }

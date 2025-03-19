@@ -9,27 +9,31 @@ import {
   SideContent,
 } from './styles';
 import { useNavigate, useParams } from 'react-router-dom';
-import { BlogArticle, CourseArticle } from '../../utils/types/entities';
+import {
+  AbsCourseArticle,
+  BlogArticle,
+  CourseArticle,
+} from '../../utils/types/entities';
 import ArticleRenderer from '../../components/ArticleRenderer';
 import { fetchData, isCourseArticle } from '../../utils/functions';
 import Loading from '../../components/Loading';
 import { useCourse } from '../../context/course';
 import CourseSideMenu from '../../components/CourseSideMenu';
-import ComponentButton from '../../components/ComponentButton';
+import ButtonLink from '../../components/ButtonLink';
 
 const ArticlePage: React.FC = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { courseModules } = useCourse();
+  const { courseData } = useCourse();
 
   const [article, setArticle] = useState<CourseArticle | BlogArticle | null>(
     null,
   );
   const [isLoading, setIsLoading] = useState(false);
 
-  const [classNum, setClassNum] = useState(0);
-  const [prevClass, setPrevClass] = useState<CourseArticle | null>(null);
-  const [nextClass, setNextClass] = useState<CourseArticle | null>(null);
+  // const [classes, setClasses] = useState<CourseArticle[]>([]);
+  const [prevClass, setPrevClass] = useState<AbsCourseArticle | null>(null);
+  const [nextClass, setNextClass] = useState<AbsCourseArticle | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -38,12 +42,11 @@ const ArticlePage: React.FC = () => {
         return;
       }
       setIsLoading(true);
-      const article = await fetchData(`/article/course/single/slug/${slug}`);
+      const article = await fetchData(`/article/course/slug/${slug}`);
       if (!article) {
-        navigate('/articlenotfound');
+        // navigate('/articlenotfound');
         return;
       }
-      console.log(article);
       setArticle(article);
       setIsLoading(false);
     })();
@@ -51,21 +54,17 @@ const ArticlePage: React.FC = () => {
 
   useEffect(() => {
     if (!isCourseArticle(article)) return;
-    if (!courseModules) return;
-    const num = courseModules.reduce(
-      (prev, mod) => prev + mod.classes.length,
-      0,
-    );
-    setClassNum(num);
-    if (article.number > 1){
-      const prev = courseModules.find(m => m.name === article.module)?.classes[article.number - 1] || null;
+    if (!courseData) return;
+    const classes = courseData.classes;
+    if (article.number > 1) {
+      const prev = classes[article.number - 2];
       if (prev) setPrevClass(prev);
     }
-    if (article.number < cla){
-      const prev = courseModules.find(m => m.name === article.module)?.classes[article.number - 1] || null;
-      if (prev) setPrevClass(prev);
+    if (article.number < classes.length) {
+      const next = classes[article.number];
+      if (next) setNextClass(next);
     }
-  }, [courseModules]);
+  }, []);
 
   return (
     <Container>
@@ -73,19 +72,33 @@ const ArticlePage: React.FC = () => {
         <Loading />
       ) : (
         <>
-          <SideContent>{courseModules && <CourseSideMenu />}</SideContent>
+          <SideContent>{courseData && <CourseSideMenu />}</SideContent>
           <Content>
             <ArticleName>{article?.title}</ArticleName>
             <ArticleRenderer article={article} isLoading={isLoading} />
             {isCourseArticle(article) && (
               <ArticleActions>
-                {article.number > 1 && (
-                  <ComponentButton centered={false} onClick={() => {navigate(`/article/${}`)}}>
+                {prevClass && (
+                  <ButtonLink
+                    to={`/article/${prevClass.slug}`}
+                    centered={false}
+                    // onClick={() => {
+                    //   navigate();
+                    // }}
+                  >
                     Aula anterior
-                  </ComponentButton>
+                  </ButtonLink>
                 )}
-                {article.number < classNum && (
-                  <NextButton centered={false}>Próxima aula</NextButton>
+                {nextClass && (
+                  <NextButton
+                    to={`/article/${nextClass.slug}`}
+                    centered={false}
+                    // onClick={() => {
+                    //   navigate(`/article/${nextClass.slug}`);
+                    // }}
+                  >
+                    Próxima aula
+                  </NextButton>
                 )}
               </ArticleActions>
             )}

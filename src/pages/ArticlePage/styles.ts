@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ComponentButton from '../../components/ComponentButton';
+import ButtonLink from '../../components/ButtonLink';
 
 export const Container = styled.div`
   display: flex;
@@ -39,6 +39,6 @@ export const ArticleActions = styled.div`
   padding: 0 16px;
 `;
 
-export const NextButton = styled(ComponentButton)`
+export const NextButton = styled(ButtonLink)`
   margin-left: auto;
 `;

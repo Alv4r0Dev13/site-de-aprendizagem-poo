@@ -19,8 +19,8 @@ const CourseAboutTab: React.FC<CourseCardI> = ({ course }) => {
         <div>
           <Title>Autor</Title>
           <Author>
-            {course.author.avatarUrl ? (
-              <AuthorAvatar src={course.author.avatarUrl} />
+            {course.author.profileUrl ? (
+              <AuthorAvatar src={course.author.profileUrl} />
             ) : (
               <NoAvatar>
                 <UserOutlined />

@@ -1,30 +1,38 @@
 import { createContext, useContext, useState } from 'react';
-import { CourseModule } from '../utils/types/entities';
+import { AbsCourseArticle, CourseModule } from '../utils/types/entities';
 import { ContainerI } from '../utils/types/components';
+import { getStorage } from '../services/storage';
+
+type CtxCourseData = {
+  id: string;
+  name: string;
+  modules: CourseModule[];
+  classes: AbsCourseArticle[];
+};
 
 type CourseContextType = {
-  courseModules: CourseModule[] | null;
-  setCourseModules: (modules: CourseModule[]) => void;
+  courseData: CtxCourseData | null;
+  setCourseData: (data: CtxCourseData) => void;
   clearCourseCtx: () => void;
 };
 
 const CourseContext = createContext<CourseContextType | null>(null);
 
 const CourseProvider: React.FC<ContainerI> = ({ children }) => {
-  const [modules, setModules] = useState<CourseModule[] | null>(null);
+  const [data, setData] = useState<CtxCourseData | null>(null);
 
-  function setCourseModules(data: CourseModule[]): void {
-    setModules(data);
+  function setCourseData(data: CtxCourseData): void {
+    setData(data);
   }
 
   function clearCourseCtx(): void {
-    if (!modules) return;
-    setModules(null);
+    if (!data) return;
+    setData(null);
   }
 
   return (
     <CourseContext.Provider
-      value={{ courseModules: modules, setCourseModules, clearCourseCtx }}
+      value={{ courseData: data, setCourseData, clearCourseCtx }}
     >
       {children}
     </CourseContext.Provider>

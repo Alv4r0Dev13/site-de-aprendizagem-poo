@@ -8,6 +8,13 @@ export type User = {
   profileUrl?: string;
 };
 
+export type Author = {
+  id: string;
+  username: string;
+  type?: UserType;
+  profileUrl?: string;
+};
+
 export type LoggedUser = User & { token: string };
 
 export type Course = {
@@ -18,12 +25,7 @@ export type Course = {
   classes: number;
   modules: string[];
   thumbnailUrl?: string;
-  author?: {
-    id: string;
-    username: string;
-    type: UserType;
-    avatarUrl?: string;
-  };
+  author?: Author;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -37,11 +39,6 @@ export type Article = {
   updatedAt: Date;
 };
 
-export type CourseModule = {
-  name: string;
-  classes: CourseArticle[];
-};
-
 export type CourseArticle = Article & {
   course: string;
   module: string;
@@ -49,6 +46,35 @@ export type CourseArticle = Article & {
 };
 
 export type BlogArticle = Article & {
-  author: string;
+  author: string | Author;
   tags: string[];
+};
+
+/**
+ * (Abstract) Summarized Article Data
+ */
+export type AbsArticle = {
+  id: string;
+  title: string;
+  slug: string;
+  createdAt: Date;
+};
+
+/**
+ * (Abstract) Summarized Course Article Data
+ */
+export type AbsCourseArticle = AbsArticle & {
+  number: number;
+};
+
+/**
+ * (Abstract) Summarized Blog Article Data
+ */
+export type AbsBlogArticle = AbsArticle & {
+  author: Author;
+};
+
+export type CourseModule = {
+  name: string;
+  classes: AbsCourseArticle[];
 };
