@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CourseCardI } from '../../utils/types/components';
 
 import {
@@ -11,8 +11,29 @@ import {
   Title,
 } from './styles';
 import { UserOutlined } from '@ant-design/icons';
+import { UserType } from '../../utils/types/enum';
+import { useUser } from '../../context/user';
+import ButtonLink from '../ButtonLink';
 
 const CourseAboutTab: React.FC<CourseCardI> = ({ course }) => {
+  const { user } = useUser();
+  const [type, setType] = useState('');
+
+  useEffect(() => {
+    if (!course.author?.type) return;
+    switch (course.author.type) {
+      case UserType.STUDENT:
+        setType('Estudante');
+        break;
+      case UserType.TEACHER:
+        setType('Professor(a)');
+        break;
+      case UserType.ADMIN:
+        setType('Administrador');
+        break;
+    }
+  }, [course]);
+
   return (
     <Container>
       {course.author && (
@@ -28,7 +49,7 @@ const CourseAboutTab: React.FC<CourseCardI> = ({ course }) => {
             )}
             <AuthorData>
               <p>{course.author.username}</p>
-              <AuthorType>{course.author.type}</AuthorType>
+              <AuthorType>{type}</AuthorType>
             </AuthorData>
           </Author>
         </div>
@@ -45,6 +66,15 @@ const CourseAboutTab: React.FC<CourseCardI> = ({ course }) => {
           {new Date(course.updatedAt).toLocaleDateString()}
         </p>
       </div>
+      {course.author?.id === user?.id && (
+        <ButtonLink
+          to={'/course/manage?action=edit'}
+          state={{ course }}
+          centered={false}
+        >
+          Editar dados
+        </ButtonLink>
+      )}
     </Container>
   );
 };

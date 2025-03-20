@@ -7,6 +7,7 @@ import Register from '../pages/Register';
 import CoursesHome from '../pages/CoursesHome';
 import ArticlePage from '../pages/ArticlePage';
 import CoursePage from '../pages/CoursePage';
+import ManageCourse from '../pages/ManageCourse';
 
 const AppRoutes = () => {
   return (
@@ -35,6 +36,15 @@ const AppRoutes = () => {
           <>
             <Header />
             <CoursePage />
+          </>
+        }
+      />
+      <Route
+        path="/course/manage"
+        element={
+          <>
+            <Header />
+            <ManageCourse />
           </>
         }
       />

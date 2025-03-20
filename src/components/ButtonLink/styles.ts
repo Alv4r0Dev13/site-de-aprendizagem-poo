@@ -4,11 +4,13 @@ import { ButtonLinkPropsI } from '../../utils/types/components';
 
 export const BtnLink = styled(Link)<ButtonLinkPropsI>`
   cursor: pointer;
+  display: block;
   /* font-weight: bold; */
   font-size: ${props => props.theme.sizes.mediumSmall};
   text-transform: uppercase;
   border: none;
   border-radius: 10px;
+  width: fit-content;
   padding: 10px 20px;
 
   ${({ theme, $color, $outlined, $centered }) => {
