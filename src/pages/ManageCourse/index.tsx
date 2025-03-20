@@ -15,6 +15,7 @@ import ImageInput from '../../components/ImageInput';
 import { Course } from '../../utils/types/entities';
 import api from '../../services/api';
 import { useUser } from '../../context/user';
+import { CourseType } from '../../utils/types/enum';
 
 const ManageCourse: React.FC = () => {
   const { user } = useUser();
@@ -27,8 +28,9 @@ const ManageCourse: React.FC = () => {
   const [thumbnail, setThumbnail] = useState<File | null>(null);
   const [name, setName] = useState(course?.name || '');
   const [description, setDescription] = useState(course?.description || '');
+  const [slug, setSlug] = useState('');
 
-  async function handleSendCourse() {
+  async function handleEditCourse() {
     let thumbnailUrl;
     if (thumbnail) {
       const formData = new FormData();
@@ -39,9 +41,7 @@ const ManageCourse: React.FC = () => {
         replace = split[split.length - 1];
       }
       thumbnailUrl = await api
-        .post(`image/upload?${replace ? `replace=${replace}` : ''}`, formData, {
-          headers: { Authorization: `Bearer ${user?.token}` },
-        })
+        .post(`image/upload?${replace ? `replace=${replace}` : ''}`, formData)
         .then(
           resp => resp.data.url,
           reason => {
@@ -89,6 +89,68 @@ const ManageCourse: React.FC = () => {
       });
   }
 
+  async function handleCreateCourse() {
+    const empty = checkErrors();
+    if (empty.length) {
+      alert(`Os seguintes campos são obrigatórios:\n${empty.join(', ')}`);
+      return;
+    }
+
+    let thumbnailUrl;
+    if (thumbnail) {
+      const formData = new FormData();
+      formData.append('image', thumbnail);
+      thumbnailUrl = await api
+        .post(`image/upload`, formData)
+        .then(
+          resp => resp.data.url,
+          reason => {
+            console.log(reason);
+            alert('Não foi possível enviar a imagem...');
+            return undefined;
+          },
+        )
+        .catch(reason => {
+          console.log(reason);
+          alert('Não foi possível enviar a imagem...');
+          return undefined;
+        });
+    }
+
+    await api
+      .post(`/course/`, {
+        name,
+        slug,
+        description,
+        type: CourseType.MAIN,
+        thumbnail: thumbnailUrl,
+        author: user!.id,
+      })
+      .then(
+        resp => {
+          alert('Curso criado com sucesso!');
+          navigate(`/course/${resp.data.id}?tab=about`, {
+            state: { ...state, course: resp.data },
+          });
+        },
+        reason => {
+          console.log(reason);
+          alert('Algo deu errado...');
+        },
+      )
+      .catch(reason => {
+        console.log(reason);
+        alert('Algo deu errado...');
+      });
+  }
+
+  function checkErrors() {
+    const empty = [];
+    if (!name) empty.push('Nome do curso');
+    if (!description) empty.push('Descrição');
+    return empty;
+  }
+
   useEffect(() => {
     const act = query.get('action');
     if (!act) {
@@ -109,8 +171,19 @@ const ManageCourse: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (action === 'Novo' && !course) navigate(-1);
+    if (action === 'edit' && !course) navigate(-1);
   }, [action]);
+
+  useEffect(() => {
+    setSlug(
+      name
+        .trim()
+        .toLocaleLowerCase()
+        .normalize()
+        .replace(/[^a-z\d\s]/gi, '')
+        .replace(' ', '-'),
+    );
+  }, [name]);
 
   return (
     <Container>
@@ -135,9 +208,11 @@ const ManageCourse: React.FC = () => {
             value={description}
             onChange={e => setDescription(e.target.value)}
           />
-          <SendButton onClick={handleSendCourse}>
-            {action === 'Novo' ? 'Criar curso' : 'Salvar'}
-          </SendButton>
+          {action === 'Novo' ? (
+            <SendButton onClick={handleCreateCourse}>Criar curso</SendButton>
+          ) : (
+            <SendButton onClick={handleEditCourse}>Salvar</SendButton>
+          )}
         </Form>
       </Content>
     </Container>

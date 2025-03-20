@@ -25,6 +25,7 @@ const ComponentInput: React.FC<ComponentInputI> = ({
   placeholder,
   showCharCount,
   value,
+  disabled,
   ...props
 }) => {
   const [newValue, setNewValue] = useState(value);
@@ -41,7 +42,11 @@ const ComponentInput: React.FC<ComponentInputI> = ({
   return (
     <Container>
       {label && (
-        <Label htmlFor={props.id} $inputHasText={!!newValue}>
+        <Label
+          htmlFor={props.id}
+          $inputHasText={!!newValue}
+          $disabled={disabled}
+        >
           {label}{' '}
           {required ? <Required title={'Campo obrigatório'}>*</Required> : null}
         </Label>
@@ -61,6 +66,7 @@ const ComponentInput: React.FC<ComponentInputI> = ({
               ? placeholder?.replace(/\w/g, '•')
               : placeholder
           }
+          disabled={disabled}
           {...props}
         />
         {type === 'password' && (

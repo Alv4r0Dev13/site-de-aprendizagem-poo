@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Container,
   Courses,
+  CreateCourseButton,
   Loading,
   MainCoursesSection,
   NoCourses,
@@ -13,10 +14,13 @@ import CourseCard from '../../components/CourseCard';
 import { Course } from '../../utils/types/entities';
 import { FileUnknownOutlined, LoadingOutlined } from '@ant-design/icons';
 import { fetchData } from '../../utils/functions';
-import { CourseType } from '../../utils/types/enum';
+import { CourseType, UserType } from '../../utils/types/enum';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../context/user';
 
 const Home: React.FC = () => {
+  const { user } = useUser();
+
   const [isLoading, setIsLoading] = useState(false);
   const [courses, setCourses] = useState<Course[]>([]);
   const [mainCourses, setMainCourses] = useState<Course[]>();
@@ -50,6 +54,11 @@ const Home: React.FC = () => {
               Venha aprender sobre Programação Orientada a Objetos com o curso
               de POO com Java da Quebracódigos.com!
             </p>
+            {user && user.type === UserType.ADMIN ? (
+              <CreateCourseButton to="/course/manage?action=create">
+                Criar curso
+              </CreateCourseButton>
+            ) : null}
             {mainCourses && mainCourses.length ? (
               <Courses>
                 {mainCourses.map((course, i) => (

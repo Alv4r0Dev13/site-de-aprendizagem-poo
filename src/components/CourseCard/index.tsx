@@ -46,9 +46,7 @@ const CourseCard: React.FC<CourseCardI> = ({ course }) => {
         </CourseHeader>
         <Description>{course.description}</Description>
       </Content>
-      <Actions>
-        <ComponentButton>Ver aula 1</ComponentButton>
-      </Actions>
+      <Actions>{/* <ComponentButton>Ver aula 1</ComponentButton> */}</Actions>
     </Container>
   );
 };

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ComponentButton from '../../components/ComponentButton';
+import ButtonLink from '../../components/ButtonLink';
 
 export const Container = styled.div`
   padding: 80px 10%;
@@ -36,6 +37,7 @@ export const SectionButton = styled(ComponentButton)`
 `;
 
 export const MainCoursesSection = styled(Section)`
+  position: relative;
   background-color: ${props => props.theme.colors.backgroundDark};
   border-radius: 10px;
   padding: 16px;
@@ -43,6 +45,12 @@ export const MainCoursesSection = styled(Section)`
   & > h1, & > p {
     color: ${props => props.theme.colors.white};
   }
+`;
+
+export const CreateCourseButton = styled(ButtonLink)`
+  position: absolute;
+  top: 16px;
+  right: 16px;
 `;
 
 export const Courses = styled.div`

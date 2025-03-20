@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { InputLabelPropsI } from '../../utils/types/components';
 
 export const Container = styled.div`
@@ -12,6 +12,7 @@ export const Container = styled.div`
 `;
 
 export const Label = styled.label<InputLabelPropsI>`
+  ${({ $disabled, theme }) => ($disabled ? css`color: ${theme.colors.placeholder};` : '')}
   position: relative;
   margin-left: 10px;
   width: fit-content;
@@ -42,6 +43,10 @@ export const InputContainer = styled.label`
   &.error {
     border-color: ${props => props.theme.colors.danger}
   }
+
+  &:has(input:disabled) {
+    cursor: not-allowed;
+  }
 `;
 
 export const Input = styled.input`
@@ -55,6 +60,10 @@ export const Input = styled.input`
   }
 
   &:focus::placeholder {
+    color: ${props => props.theme.colors.placeholder};
+  }
+
+  &:disabled {
     color: ${props => props.theme.colors.placeholder};
   }
 `;

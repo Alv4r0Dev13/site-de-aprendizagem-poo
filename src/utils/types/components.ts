@@ -18,6 +18,7 @@ export interface ComponentInputI
 export interface InputLabelPropsI
   extends React.LabelHTMLAttributes<HTMLLabelElement> {
   $inputHasText?: boolean;
+  $disabled?: boolean;
 }
 
 export interface ComponentButtonI
