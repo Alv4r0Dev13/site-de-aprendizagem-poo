@@ -7,17 +7,40 @@ import {
   AuthorData,
   AuthorType,
   Container,
+  CourseActions,
+  DeleteButton,
   NoAvatar,
   Title,
 } from './styles';
-import { UserOutlined } from '@ant-design/icons';
+import { DeleteOutlined, UserOutlined } from '@ant-design/icons';
 import { UserType } from '../../utils/types/enum';
 import { useUser } from '../../context/user';
 import ButtonLink from '../ButtonLink';
+import api from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const CourseAboutTab: React.FC<CourseCardI> = ({ course }) => {
   const { user } = useUser();
   const [type, setType] = useState('');
+  const navigate = useNavigate();
+
+  async function handleClickDelete() {
+    const del = confirm('Deseja mesmo deletar o curso?');
+    if (del) handleDeleteCourse();
+  }
+
+  async function handleDeleteCourse() {
+    await api
+      .delete(`/course/${course.id}`)
+      .then(() => {
+        alert('Curso deletado com sucesso!');
+        navigate('/');
+      })
+      .catch(reason => {
+        console.log(reason.response.data);
+        alert('Algo deu errado...');
+      });
+  }
 
   useEffect(() => {
     if (!course.author?.type) return;
@@ -67,13 +90,23 @@ const CourseAboutTab: React.FC<CourseCardI> = ({ course }) => {
         </p>
       </div>
       {course.author?.id === user?.id && (
-        <ButtonLink
-          to={'/course/manage?action=edit'}
-          state={{ course }}
-          centered={false}
-        >
-          Editar dados
-        </ButtonLink>
+        <CourseActions>
+          <ButtonLink
+            to={'/course/manage?action=edit'}
+            state={{ course }}
+            centered={false}
+          >
+            Editar dados
+          </ButtonLink>
+          <DeleteButton
+            title="Deletar curso"
+            centered={false}
+            color="danger"
+            onClick={handleClickDelete}
+          >
+            <DeleteOutlined />
+          </DeleteButton>
+        </CourseActions>
       )}
     </Container>
   );

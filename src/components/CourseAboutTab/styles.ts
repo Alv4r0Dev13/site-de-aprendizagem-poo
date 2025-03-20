@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ComponentButton from '../ComponentButton';
 
 export const Container = styled.div`
   display: flex;
@@ -47,4 +48,15 @@ export const AuthorData = styled.div`
 export const AuthorType = styled.p`
   font-size: ${props => props.theme.sizes.small};
   color: ${props => props.theme.colors.textLight};
+`;
+
+export const CourseActions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const DeleteButton = styled(ComponentButton)`
+  font-size: 20px;
+  padding: 0 8px;
 `;
