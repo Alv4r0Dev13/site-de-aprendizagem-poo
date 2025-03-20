@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import { Container } from './styles';
+import { Container, Content, Title } from './styles';
 import { useQuery } from '../../hooks/useQuery';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Content } from './styles';
-import { Title } from './styles';
 
 const ManageCourse: React.FC = () => {
   const query = useQuery();
