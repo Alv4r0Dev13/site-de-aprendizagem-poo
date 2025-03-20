@@ -54,7 +54,7 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: underline;
   }
 
-  input {
+  input, textarea {
     font-family: 'Rubik';
     font-size: ${props => props.theme.sizes.regular};
 

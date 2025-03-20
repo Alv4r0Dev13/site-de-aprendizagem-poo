@@ -8,6 +8,7 @@ import CoursesHome from '../pages/CoursesHome';
 import ArticlePage from '../pages/ArticlePage';
 import CoursePage from '../pages/CoursePage';
 import ManageCourse from '../pages/ManageCourse';
+import PrivateRoute from './private';
 
 const AppRoutes = () => {
   return (
@@ -42,10 +43,10 @@ const AppRoutes = () => {
       <Route
         path="/course/manage"
         element={
-          <>
+          <PrivateRoute>
             <Header />
             <ManageCourse />
-          </>
+          </PrivateRoute>
         }
       />
       <Route

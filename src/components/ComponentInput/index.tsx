@@ -24,9 +24,10 @@ const ComponentInput: React.FC<ComponentInputI> = ({
   maxLength,
   placeholder,
   showCharCount,
+  value,
   ...props
 }) => {
-  const [value, setValue] = useState('');
+  const [newValue, setNewValue] = useState(value);
   const [passwordShow, setPasswordShow] = useState(false);
   const [inputType, setInputType] = useState(type);
   const [charCount, setCharCount] = useState(0);
@@ -40,7 +41,7 @@ const ComponentInput: React.FC<ComponentInputI> = ({
   return (
     <Container>
       {label && (
-        <Label htmlFor={props.id} $inputHasText={!!value}>
+        <Label htmlFor={props.id} $inputHasText={!!newValue}>
           {label}{' '}
           {required ? <Required title={'Campo obrigatório'}>*</Required> : null}
         </Label>
@@ -48,9 +49,10 @@ const ComponentInput: React.FC<ComponentInputI> = ({
       <InputContainer className={error ? 'error' : ''}>
         <Input
           type={inputType}
+          value={newValue}
           onChange={e => {
             onChange?.(e);
-            setValue(e.currentTarget.value);
+            setNewValue(e.currentTarget.value);
             if (maxLength) setCharCount(e.currentTarget.value.length);
           }}
           maxLength={maxLength}

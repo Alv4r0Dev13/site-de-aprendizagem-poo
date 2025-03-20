@@ -80,5 +80,6 @@ export const ErrorMessage = styled.p`
 
 export const CharCount = styled.p`
   color: ${props => props.theme.colors.textLight};
+  width: fit-content;
   margin-left: auto;
 `;

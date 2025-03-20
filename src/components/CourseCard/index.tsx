@@ -28,7 +28,7 @@ const CourseCard: React.FC<CourseCardI> = ({ course }) => {
       }
     >
       {course.thumbnailUrl ? (
-        <Thumbnail />
+        <Thumbnail src={course.thumbnailUrl} />
       ) : (
         <NoThumb>
           <FileTextOutlined />

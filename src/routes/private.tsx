@@ -4,6 +4,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 
 import { getStorage } from '../services/storage';
 import { useUser } from '../context/user';
+import api from '../services/api';
 
 const PrivateRoute: React.FC<ContainerI> = ({ children }) => {
   const location = useLocation();
@@ -19,6 +20,7 @@ const PrivateRoute: React.FC<ContainerI> = ({ children }) => {
         />
       );
   }
+  api.defaults.headers.authorization = `Bearer ${user?.token || storedUser?.token}`;
 
   return <>{children}</>;
 };

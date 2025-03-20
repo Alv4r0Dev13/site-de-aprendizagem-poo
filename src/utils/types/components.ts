@@ -83,3 +83,12 @@ export interface MenuDetailsPropsI {
 export interface MenuLinkI {
   $selected?: boolean;
 }
+
+export interface ImageInputI {
+  imageUrl?: string;
+  allowDelete?: boolean;
+  onChange: (image: File | null) => void;
+}
+
+export interface ComponentTextAreaI
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}

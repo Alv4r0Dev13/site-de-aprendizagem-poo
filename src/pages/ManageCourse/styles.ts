@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import ComponentInput from '../../components/ComponentInput';
+import ComponentTextArea from '../../components/ComponentTextArea';
+import ComponentButton from '../../components/ComponentButton';
 
 export const Container = styled.div`
   display: flex;
@@ -26,4 +29,25 @@ export const Title = styled.h1`
   /* margin: 0 10%; */
   top: -32px;
   left: 10%;
+`;
+
+export const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  padding: 16px 24px;
+  width: 100%;
+`;
+
+export const NameInput = styled(ComponentInput)`
+  width: 580px;
+`;
+
+export const DescriptionInput = styled(ComponentTextArea)`
+  width: 600px;
+`;
+
+export const SendButton = styled(ComponentButton)`
+  margin-top: 16px;
 `;
