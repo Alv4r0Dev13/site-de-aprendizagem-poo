@@ -30,6 +30,8 @@ export const BtnLink = styled(Link)<ButtonLinkPropsI>`
   }}
 
   &:hover {
+    text-decoration: none;
+
     ${({ theme, $color }) => {
       let color;
       switch ($color) {

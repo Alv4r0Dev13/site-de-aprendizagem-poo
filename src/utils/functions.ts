@@ -1,6 +1,6 @@
 import axios from 'axios';
 import api from '../services/api';
-import { BlogArticle, CourseArticle } from './types/entities';
+import { BlogArticle, Course, CourseArticle } from './types/entities';
 
 /**
  * Makes a request to the API.
@@ -36,6 +36,12 @@ export async function fetchData<T = any>(
     .finally(onFinally);
 }
 
+/**
+ * Tests if given article is a course article
+ *
+ * @param article article to test
+ * @returns article is CourseArticle
+ */
 export function isCourseArticle(
   article: CourseArticle | BlogArticle | null,
 ): article is CourseArticle {

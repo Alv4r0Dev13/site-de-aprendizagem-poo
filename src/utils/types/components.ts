@@ -1,5 +1,5 @@
 import React from 'react';
-import { Article, Course, CourseModule } from './entities';
+import { Article, Course, CourseArticle, CourseModule } from './entities';
 import { LinkProps } from 'react-router-dom';
 
 export interface ContainerI {
@@ -70,4 +70,16 @@ export interface ClassesTabI {
   modules: CourseModule[];
   isLoading?: boolean;
   isError?: boolean;
+}
+
+export interface CourseSideMenuI {
+  article: CourseArticle;
+}
+
+export interface MenuDetailsPropsI {
+  $open?: boolean;
+}
+
+export interface MenuLinkI {
+  $selected?: boolean;
 }

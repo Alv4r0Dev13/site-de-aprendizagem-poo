@@ -78,3 +78,17 @@ export type CourseModule = {
   name: string;
   classes: AbsCourseArticle[];
 };
+
+export type Question = {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  author: Author;
+  likes: string[];
+  answers: number;
+  comments: number;
+  correctAnswer: number;
+  createdAt: string;
+  updatedAt: string;
+};

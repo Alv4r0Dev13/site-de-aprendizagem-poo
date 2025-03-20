@@ -3,11 +3,16 @@ import ButtonLink from '../../components/ButtonLink';
 
 export const Container = styled.div`
   display: flex;
+  gap: 32px;
   margin: 60px;
 `;
 
+export const LoadingContainer = styled.div`
+  margin: auto;
+`;
+
 export const SideContent = styled.div`
-  width: 300px;
+  width: 200px;
 `;
 
 export const Content = styled.div`
@@ -17,6 +22,7 @@ export const Content = styled.div`
   border-radius: 20px;
   box-shadow: ${props => props.theme.shadow.default};
   padding-top: 48px;
+  width: 100%;
 `;
 
 export const ArticleName = styled.h1`

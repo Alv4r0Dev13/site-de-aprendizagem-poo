@@ -19,9 +19,9 @@ const theme = {
     dangerLight: '#FF7381',
   },
   sizes: {
-    largest: '2.5rem',
-    large: '2rem',
-    mediumLarge: '1.5rem',
+    largest: '2.2rem',
+    large: '1.8rem',
+    mediumLarge: '1.4rem',
     regular: '1rem',
     mediumSmall: '0.94rem',
     small: '0.81rem',

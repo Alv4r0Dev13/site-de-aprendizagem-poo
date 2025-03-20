@@ -3,7 +3,7 @@ import { AbsCourseArticle, CourseModule } from '../utils/types/entities';
 import { ContainerI } from '../utils/types/components';
 import { getStorage } from '../services/storage';
 
-type CtxCourseData = {
+export type CtxCourseData = {
   id: string;
   name: string;
   modules: CourseModule[];
