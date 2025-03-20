@@ -13,10 +13,15 @@ export const Content = styled.div`
   width: 100%;
 `;
 
-export const Thumbnail = styled.img`
+export const ThumbContainer = styled.div`
+  display: flex;
+  align-items: center;
+  overflow: hidden;
   width: 100%;
   height: 300px;
 `;
+
+export const Thumbnail = styled.img``;
 
 export const NoThumb = styled.div`
   background-color: ${props => props.theme.colors.placeholder};

@@ -24,7 +24,7 @@ export type Course = {
   type: CourseType;
   classes: number;
   modules: string[];
-  thumbnailUrl?: string;
+  thumbnail?: string;
   author?: Author;
   createdAt: Date;
   updatedAt: Date;

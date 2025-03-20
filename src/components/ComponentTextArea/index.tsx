@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
-import { CharCount, Container, Text } from './styles';
+import { CharCount, Container, Label, Text } from './styles';
 import { ComponentTextAreaI } from '../../utils/types/components';
 
 const ComponentTextArea: React.FC<ComponentTextAreaI> = ({
+  label,
   maxLength,
   onChange,
   ...props
@@ -12,7 +13,10 @@ const ComponentTextArea: React.FC<ComponentTextAreaI> = ({
 
   return (
     <Container>
+      {label && <Label htmlFor="text">{label}</Label>}
       <Text
+        id={'text'}
+        $hasLabel={!!label}
         maxLength={maxLength}
         {...props}
         onChange={e => {

@@ -9,6 +9,7 @@ import {
   TabButton,
   TabContent,
   TabNavigator,
+  ThumbContainer,
   Thumbnail,
   TitleDetails,
 } from './styles';
@@ -34,6 +35,7 @@ const CoursePage: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const course: Course | null = state.course || null;
+  console.log(course);
 
   const [tab, setTab] = useState('about');
   const query = useQuery();
@@ -120,8 +122,10 @@ const CoursePage: React.FC = () => {
   return course ? (
     <Container>
       <Content>
-        {course.thumbnailUrl ? (
-          <Thumbnail src={course.thumbnailUrl} />
+        {course.thumbnail ? (
+          <ThumbContainer>
+            <Thumbnail src={course.thumbnail} />
+          </ThumbContainer>
         ) : (
           <NoThumb>
             <FileTextOutlined />

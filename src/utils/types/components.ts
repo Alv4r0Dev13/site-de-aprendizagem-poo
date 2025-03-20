@@ -91,4 +91,10 @@ export interface ImageInputI {
 }
 
 export interface ComponentTextAreaI
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label?: string;
+}
+
+export interface TextAreaPropsI {
+  $hasLabel: boolean;
+}

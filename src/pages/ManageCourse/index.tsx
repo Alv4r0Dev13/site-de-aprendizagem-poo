@@ -28,32 +28,31 @@ const ManageCourse: React.FC = () => {
   const [name, setName] = useState(course?.name || '');
   const [description, setDescription] = useState(course?.description || '');
 
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [error, setError] = useState('');
-
   async function handleSendCourse() {
-    // console.log(user);
     let thumbnailUrl;
     if (thumbnail) {
-      console.log(thumbnail);
       const formData = new FormData();
       formData.append('image', thumbnail);
-      thumbnailUrl = api
-        .post('image/upload', formData, {
+      let replace = '';
+      if (course?.thumbnail) {
+        const split = course.thumbnail.split('/');
+        replace = split[split.length - 1];
+      }
+      thumbnailUrl = await api
+        .post(`image/upload?${replace ? `replace=${replace}` : ''}`, formData, {
           headers: { Authorization: `Bearer ${user?.token}` },
         })
         .then(
-          resp => {
-            console.log(resp);
-            return undefined;
-          },
+          resp => resp.data.url,
           reason => {
             console.log(reason);
+            alert('Não foi possível enviar a imagem...');
             return undefined;
           },
         )
         .catch(reason => {
           console.log(reason);
+          alert('Não foi possível enviar a imagem...');
           return undefined;
         });
     }
@@ -70,30 +69,25 @@ const ManageCourse: React.FC = () => {
         name: name !== course.name ? name : undefined,
         description:
           description !== course.description ? description : undefined,
-        thumbnailUrl,
+        thumbnail: thumbnailUrl,
       })
       .then(
-        () => {
-          console.log('foi');
-          setIsSuccess(true);
+        resp => {
+          alert('Dados do curso alterados com sucesso!');
+          navigate(`/course/${course.id}?tab=about`, {
+            state: { ...state, course: resp.data },
+          });
         },
         reason => {
           console.log(reason);
+          alert('Algo deu errado...');
         },
       )
       .catch(reason => {
         console.log(reason);
+        alert('Algo deu errado...');
       });
   }
-
-  useEffect(() => {
-    (async () => {
-      if (!course?.thumbnailUrl) return;
-      await fetch(course.thumbnailUrl).then(resp => {
-        setThumbnail(thumbnail);
-      });
-    })();
-  }, []);
 
   useEffect(() => {
     const act = query.get('action');
@@ -124,7 +118,7 @@ const ManageCourse: React.FC = () => {
         <Title>{action} curso</Title>
         <Form>
           <ImageInput
-            imageUrl={course?.thumbnailUrl}
+            imageUrl={course?.thumbnail}
             onChange={img => setThumbnail(img)}
             allowDelete
           />
@@ -136,6 +130,7 @@ const ManageCourse: React.FC = () => {
             showCharCount
           />
           <DescriptionInput
+            label="Descrição"
             placeholder="Escreva a descrição aqui..."
             value={description}
             onChange={e => setDescription(e.target.value)}

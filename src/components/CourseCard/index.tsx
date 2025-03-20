@@ -27,8 +27,8 @@ const CourseCard: React.FC<CourseCardI> = ({ course }) => {
         navigate(`/course/${course.id}?tab=about`, { state: { course } })
       }
     >
-      {course.thumbnailUrl ? (
-        <Thumbnail src={course.thumbnailUrl} />
+      {course.thumbnail ? (
+        <Thumbnail src={course.thumbnail} />
       ) : (
         <NoThumb>
           <FileTextOutlined />
